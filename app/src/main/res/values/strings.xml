@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">RouteTask</string>
+    <string name="route_logo">Route Logo</string>
+    <string name="logo">Route Logo</string>
+    <string name="search_hint">What do you search for?</string>
+    <string name="cart">Cart</string>
+    <string name="add_to_favorites">Add to Favorites</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="product_image">Product Image</string>
+    <string name="nike_air_jordan">Nike Air Jordan</string>
+    <string name="egp_1_200">EGP 1,200</string>
+    <string name="review_4_6">Review (4.6)</string>
+    <string name="dummy_description_about_the_product_to_test_ellip_size">Dummy Description about the product to test ellip size</string>
+    <string name="star_icon">Star Icon</string>
 </resources>
