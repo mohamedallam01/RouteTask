@@ -12,4 +12,6 @@
     <string name="review_4_6">Review (4.6)</string>
     <string name="dummy_description_about_the_product_to_test_ellip_size">Dummy Description about the product to test ellip size</string>
     <string name="star_icon">Star Icon</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
