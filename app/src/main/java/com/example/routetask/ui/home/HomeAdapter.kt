@@ -5,6 +5,8 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
@@ -16,9 +18,16 @@ import com.example.routetask.model.entities.Product
 import java.util.Locale
 
 class HomeAdapter(private val context: Context) :
-    ListAdapter<Product, ProductViewHolder>(ProductDiffUtil()) {
+    ListAdapter<Product, ProductViewHolder>(ProductDiffUtil()), Filterable {
 
+    private var productListFull: List<Product> = emptyList()
 
+    override fun submitList(list: List<Product>?) {
+        super.submitList(list)
+        if (list != null) {
+            productListFull = ArrayList(list)
+        }
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view: View = inflater.inflate(R.layout.item_product, parent, false)
@@ -44,6 +53,36 @@ class HomeAdapter(private val context: Context) :
         Glide.with(context)
             .load(thumbnail)
             .into(holder.ivProduct)
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val filteredList: MutableList<Product> = ArrayList()
+
+                if (constraint == null || constraint.isEmpty()) {
+                    filteredList.addAll(productListFull)
+                } else {
+                    val filterPattern = constraint.toString().toLowerCase(Locale.ROOT).trim()
+
+                    for (item in productListFull) {
+                        if (item.title.toLowerCase(Locale.ROOT).contains(filterPattern) ||
+                            item.description.toLowerCase(Locale.ROOT).contains(filterPattern)) {
+                            filteredList.add(item)
+                        }
+                    }
+                }
+
+                val results = FilterResults()
+                results.values = filteredList
+                return results
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                submitList(results?.values as List<Product>)
+            }
+        }
     }
 
 }
