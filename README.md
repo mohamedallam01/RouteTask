@@ -2,6 +2,7 @@
 
 an Android mobile application that fetches and displays a list of products using the Dummy JSON Products API. The application showcases modern Android development practices including MVVM architecture, Repository Pattern, Hilt for dependency injection, and Clean Architecture principles.
 
+## Screenshots
 ## Features
 
 - **Home Screen:**
@@ -9,7 +10,7 @@ an Android mobile application that fetches and displays a list of products using
   - Show product image, name, price after discount, real price and rating
   - Search by the name of the product
 <div style="display:flex; justify-content:space-between;">
-    <img src="(https://imgur.com/4bxnAgw)" width="30%">
+    <img src="https://imgur.com/4bxnAgw.jpeg" width="30%">
 </div>
 
  
