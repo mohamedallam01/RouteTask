@@ -1,5 +1,7 @@
 package com.example.routetask.model.entities
 
+import Meta
+import Review
 
 data class Product(
     val id: Int,
@@ -26,23 +28,4 @@ data class Product(
     val thumbnail: String
 )
 
-data class Dimensions(
-    val width: Double,
-    val height: Double,
-    val depth: Double
-)
 
-data class Review(
-    val rating: Int,
-    val comment: String,
-    val date: String,
-    val reviewerName: String,
-    val reviewerEmail: String
-)
-
-data class Meta(
-    val createdAt: String,
-    val updatedAt: String,
-    val barcode: String,
-    val qrCode: String
-)

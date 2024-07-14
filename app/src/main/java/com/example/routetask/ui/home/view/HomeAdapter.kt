@@ -1,4 +1,4 @@
-package com.example.routetask.ui.home
+package com.example.routetask.ui.home.view
 
 import android.content.Context
 import android.graphics.Paint
@@ -28,6 +28,7 @@ class HomeAdapter(private val context: Context) :
             productListFull = ArrayList(list)
         }
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view: View = inflater.inflate(R.layout.item_product, parent, false)
@@ -36,24 +37,10 @@ class HomeAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product: Product = getItem(position)
+        holder.bindData(product, context)
 
-
-        val thumbnail = product.thumbnail
-        holder.tvProductName.text = product.title
-        holder.tvProductDesc.text = product.description
-        holder.tvFinalPrice.text = context.getString(R.string.egp, product.price.toString())
-        holder.tvRealPrice.text = calculateRealPrice(product.price, product.discountPercentage)
-        holder.tvRealPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-        holder.tvProductReview.text = context.getString(R.string.review, product.rating.toString())
-
-
-
-
-
-        Glide.with(context)
-            .load(thumbnail)
-            .into(holder.ivProduct)
     }
+
 
     override fun getFilter(): Filter {
         return object : Filter() {
@@ -67,7 +54,8 @@ class HomeAdapter(private val context: Context) :
 
                     for (item in productListFull) {
                         if (item.title.toLowerCase(Locale.ROOT).contains(filterPattern) ||
-                            item.description.toLowerCase(Locale.ROOT).contains(filterPattern)) {
+                            item.description.toLowerCase(Locale.ROOT).contains(filterPattern)
+                        ) {
                             filteredList.add(item)
                         }
                     }
@@ -90,12 +78,27 @@ class HomeAdapter(private val context: Context) :
 
 class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    val ivProduct: ImageView = itemView.findViewById(R.id.iv_product)
-    val tvProductName: TextView = itemView.findViewById(R.id.tv_product_name)
-    val tvProductDesc: TextView = itemView.findViewById(R.id.tv_product_description)
-    val tvFinalPrice: TextView = itemView.findViewById(R.id.tv_final_price)
-    val tvRealPrice: TextView = itemView.findViewById(R.id.tv_real_price)
-    val tvProductReview: TextView = itemView.findViewById(R.id.tv_product_review)
+    private val ivProduct: ImageView = itemView.findViewById(R.id.iv_product)
+    private val tvProductName: TextView = itemView.findViewById(R.id.tv_product_name)
+    private val tvProductDesc: TextView = itemView.findViewById(R.id.tv_product_description)
+    private val tvDiscountedPrice: TextView = itemView.findViewById(R.id.tv_discounted_price)
+    private val tvOriginalPrice: TextView = itemView.findViewById(R.id.tv_original_price)
+    private val tvProductReview: TextView = itemView.findViewById(R.id.tv_product_review)
+
+
+    fun bindData(product: Product, context: Context) {
+        val thumbnail = product.thumbnail
+        tvProductName.text = product.title
+        tvProductDesc.text = product.description
+        tvDiscountedPrice.text = context.getString(R.string.egp, product.price.toString())
+        "${calculateOriginalPrice(product.price, product.discountPercentage)} EGP".also { tvOriginalPrice.text = it }
+        tvOriginalPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+        tvProductReview.text = context.getString(R.string.review, product.rating.toString())
+
+        Glide.with(context)
+            .load(thumbnail)
+            .into(ivProduct)
+    }
 
 
 }
@@ -110,9 +113,9 @@ class ProductDiffUtil : DiffUtil.ItemCallback<Product>() {
     }
 }
 
-fun calculateRealPrice(finalPrice: Double, discount: Double): String {
+fun calculateOriginalPrice(discountedPrice: Double, discountPercentage: Double): String {
 
-    val realPrice = discount / 100 * finalPrice + finalPrice
+    val realPrice = discountPercentage / 100 * discountedPrice + discountedPrice
 
     return String.format(Locale.US, "%.2f", realPrice)
 
