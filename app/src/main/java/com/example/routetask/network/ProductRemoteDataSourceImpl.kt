@@ -2,6 +2,7 @@ package com.example.routetask.network
 
 import android.util.Log
 import com.example.routetask.model.entities.ProductResponse
+import retrofit2.Response
 import javax.inject.Inject
 
 
@@ -9,11 +10,17 @@ class ProductRemoteDataSourceImpl @Inject constructor(
     private val productService: ProductService
 ): ProductRemoteDataSource {
 
-    private val TAG = "ProductRemoteDataSourceImpl"
 
-    override suspend fun getProducts(): ProductResponse {
-        val response = productService.getProducts()
-        Log.d(TAG, "getProducts: $response ")
-        return response
+    override suspend fun getProducts(): Result<ProductResponse> {
+        return try {
+            val response = productService.getProducts()
+            if (response.isSuccessful) {
+                Result.success(response.body()!!)
+            } else {
+                Result.failure(Exception("Failed to fetch products: ${response.message()}"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 }

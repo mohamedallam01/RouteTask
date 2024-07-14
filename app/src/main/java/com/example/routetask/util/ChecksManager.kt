@@ -5,9 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 
 
-private const val REQUEST_CODE_DRAW_OVER_OTHER_APPS = 123
 object ChecksManager {
-
 
     fun checkConnection(context: Context): Boolean {
         val connectivityManager =
@@ -18,8 +16,5 @@ object ChecksManager {
             NetworkCapabilities.TRANSPORT_CELLULAR
         ))
     }
-
-
-
 
 }

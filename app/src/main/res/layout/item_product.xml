@@ -5,17 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="24dp"
-    app:cardBackgroundColor="@color/white"
     android:elevation="4dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="24dp"
     app:strokeColor="@color/dark_cerulean"
-    app:strokeWidth="1dp"
-    >
+    app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:padding="12dp">
 
         <ImageView
             android:id="@+id/iv_product"
@@ -34,10 +33,10 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textSize="16sp"
             android:text="@string/nike_air_jordan"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/purple_black"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_product" />
@@ -57,23 +56,24 @@
 
 
         <TextView
-            android:id="@+id/tv_final_price"
+            android:id="@+id/tv_discounted_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/egp_1_200"
             android:layout_marginTop="8dp"
+            android:text="@string/egp_1_200"
+            android:textSize="14sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/purple_black"
-            app:layout_constraintTop_toBottomOf="@id/tv_product_description"
             app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintTop_toBottomOf="@id/tv_product_description" />
 
         <TextView
-            android:id="@+id/tv_real_price"
+            android:id="@+id/tv_original_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/real_price"
-            android:layout_marginTop="8dp"
+            android:textSize="12sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/dark_cerulean"
             app:layout_constraintStart_toStartOf="@id/iv_star"
@@ -84,21 +84,22 @@
             android:id="@+id/tv_product_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/review_4_6"
             android:layout_marginTop="8dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:text="@string/review_4_6"
+            android:textSize="14sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/purple_black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_final_price" />
+            app:layout_constraintTop_toBottomOf="@id/tv_discounted_price" />
 
         <ImageView
             android:id="@+id/iv_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="2dp"
             android:contentDescription="@string/star_icon"
             android:src="@drawable/ic_star"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_product_review" />
 
@@ -106,10 +107,12 @@
             android:id="@+id/favorite_button"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_margin="4dp"
             android:contentDescription="@string/add_to_favorites"
+            android:src="@drawable/ic_favorite_border"
             app:civ_border_color="@color/white"
             app:civ_border_width="2dp"
-            android:src="@drawable/ic_favorite_border"
+            app:civ_circle_background_color="@color/white"
             app:layout_constraintEnd_toEndOf="@id/iv_product"
             app:layout_constraintTop_toTopOf="@id/iv_product" />
 

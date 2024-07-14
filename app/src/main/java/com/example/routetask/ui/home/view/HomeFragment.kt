@@ -1,37 +1,29 @@
-package com.example.routetask.ui.home
+package com.example.routetask.ui.home.view
 
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.routetask.R
 import com.example.routetask.databinding.FragmentHomeBinding
-import com.example.routetask.model.entities.Product
-import com.example.routetask.network.ProductRemoteDataSourceImpl
+import com.example.routetask.ui.home.viewmodel.HomeViewModel
 import com.example.weatherwise.util.ChecksManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    private val TAG = "HomeFragment"
 
     private lateinit var homeBinding: FragmentHomeBinding
     private val homeViewModel: HomeViewModel by viewModels()
@@ -49,7 +41,6 @@ class HomeFragment : Fragment() {
     ): View {
         homeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
-
         // Inflate the layout for this fragment
         return homeBinding.root
 
@@ -64,9 +55,13 @@ class HomeFragment : Fragment() {
         if (ChecksManager.checkConnection(requireContext())) {
             displayData(requireContext())
         } else {
-            Toast.makeText(requireContext(), "Check Your Internet Connection", Toast.LENGTH_SHORT)
-                .show()
+            Toast.makeText(
+                requireContext(),
+                "Check Your Internet Connection",
+                Toast.LENGTH_LONG
+            ).show()
         }
+
         setupSearchFunctionality()
 
     }
@@ -77,25 +72,31 @@ class HomeFragment : Fragment() {
         homeBinding.rvProducts.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            homeViewModel.allProducts.collect { productsList ->
-                homeAdapter.submitList(productsList)
-                homeBinding.prHome.visibility = View.GONE
+        lifecycleScope.launch {
+            homeViewModel.allProducts.collect { result ->
+                result.fold(
+                    onSuccess = { productsList ->
+                        homeAdapter.submitList(productsList.products)
+                        homeBinding.prHome.visibility = View.GONE
+                    },
+                    onFailure = { error ->
+                        Toast.makeText(
+                            context,
+                            "Failed to fetch products: ${error.message}",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                )
             }
         }
-
 
     }
 
     private fun setupSearchFunctionality() {
         homeBinding.etSearchField.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
+            override fun afterTextChanged(s: Editable?) {}
 
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 homeAdapter.filter.filter(s)
