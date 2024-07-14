@@ -9,7 +9,7 @@ an Android mobile application that fetches and displays a list of products using
   - Show product image, name, price after discount, real price and rating
   - Search by the name of the product
 <div style="display:flex; justify-content:space-between;">
-    <img src="https://imgur.com/a/8SWGGhq" width="30%">
+    <img src="(https://imgur.com/4bxnAgw)" width="30%">
 </div>
 
  
