@@ -1,6 +1,7 @@
 package com.example.routetask.network
 
-import ProductResponse
+import com.example.routetask.model.entities.ProductResponse
+
 
 interface ProductRemoteDataSource {
 

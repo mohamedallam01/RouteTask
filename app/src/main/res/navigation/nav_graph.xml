@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.routetask.ui.HomeFragment"
+        android:name="com.example.routetask.ui.home.HomeFragment"
         android:label="HomeFragment" />
 </navigation>

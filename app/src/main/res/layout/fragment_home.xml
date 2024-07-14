@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="@color/white"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <ImageView
         android:id="@+id/iv_route_logo"
@@ -25,12 +27,13 @@
         android:paddingTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_route_logo">
+        app:layout_constraintTop_toBottomOf="@id/iv_route_logo"
+        >
 
         <EditText
             android:id="@+id/search_field"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             android:layout_marginEnd="16dp"
             android:layout_weight="1"
             android:autofillHints="@string/search_hint"
@@ -40,6 +43,8 @@
             android:inputType="text"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
+            android:drawablePadding="8dp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_route_logo" />
 
@@ -51,15 +56,16 @@
             android:src="@drawable/ic_cart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/search_field"
-            app:layout_constraintTop_toBottomOf="@id/iv_route_logo" />
+            app:layout_constraintTop_toBottomOf="@id/iv_route_logo"
+            />
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_products"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
