@@ -1,6 +1,6 @@
 # RouteTask
 
-an Android mobile application that fetches and displays a list of products using the Dummy JSON Products API. The application showcases modern Android development practices including MVVM architecture, Repository Pattern, Hilt for dependency injection, and Clean Architecture principles.
+An Android mobile application that fetches and displays a list of products using the Dummy JSON Products API. The application showcases modern Android development practices including MVVM architecture, Repository Pattern, Hilt for dependency injection, and Clean Architecture principles.
 
 ## Screenshots
 ## Features
