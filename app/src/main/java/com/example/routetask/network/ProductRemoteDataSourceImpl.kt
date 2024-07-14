@@ -1,20 +1,16 @@
 package com.example.routetask.network
 
-import ProductResponse
 import android.util.Log
-import com.example.routetask.di.ProductApiModule
+import com.example.routetask.model.entities.ProductResponse
+import javax.inject.Inject
 
-class ProductRemoteDataSourceImpl: ProductRemoteDataSource {
+
+class ProductRemoteDataSourceImpl @Inject constructor(
+    private val productService: ProductService
+): ProductRemoteDataSource {
 
     private val TAG = "ProductRemoteDataSourceImpl"
 
-    private val retrofit by lazy {
-        ProductApiModule.ProductApiModule().provideRetrofit()
-    }
-
-    private val productService :ProductService  by lazy {
-        ProductApiModule.ProductApiModule().provideProductService(retrofit)
-    }
     override suspend fun getProducts(): ProductResponse {
         val response = productService.getProducts()
         Log.d(TAG, "getProducts: $response ")

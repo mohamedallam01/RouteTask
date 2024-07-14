@@ -5,6 +5,6 @@ import dagger.hilt.android.HiltAndroidApp
 
 
 @HiltAndroidApp
-class ProductApp : Application(){
+class ProductsApp : Application(){
 
 }

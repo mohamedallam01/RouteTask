@@ -36,6 +36,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -57,6 +61,8 @@ dependencies {
 
     //Coroutines
     implementation(libs.kotlinx.coroutines.core)
+    implementation (libs.androidx.lifecycle.runtime.ktx)
+    implementation (libs.kotlinx.coroutines.android)
 
     //Navigation
     implementation(libs.androidx.navigation.fragment.ktx)
@@ -66,6 +72,10 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
-    //coil
-    implementation(libs.coil)
+    //Glide
+    implementation (libs.glide)
+
+    //Circular Image
+    implementation (libs.circleimageview)
+
 }

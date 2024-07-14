@@ -1,9 +1,8 @@
 package com.example.routetask.model.repo
 
-import ProductResponse
-import kotlinx.coroutines.flow.Flow
+import com.example.routetask.model.entities.Product
 
 interface ProductsRepository {
-     suspend fun getProductResponse() : ProductResponse
+     suspend fun getProducts() : List<Product>
 
 }
