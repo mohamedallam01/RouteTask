@@ -7,7 +7,7 @@ an Android mobile application that fetches and displays a list of products using
 
 - **Home Screen:**
   - Display a list of products
-  - Show product image, name, price after discount, real price and rating
+  - Show product image, name, discounted price, original price and rating
   - Search by the name of the product
 <div style="display:flex; justify-content:space-between;">
     <img src="https://imgur.com/4bxnAgw.jpeg" width="30%">
